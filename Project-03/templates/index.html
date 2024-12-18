@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analysis (Positive or Negative)</title>
+    <link rel="shortcut icon" href="static/Icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+        background-color: black;
+        background-image: url("static/sentiment_analysis_bg.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: #cccccc;-->
+    }
+    .container {
+        margin-top: 50px;
+    }
+    h1 {
+        color: #007bff;
+    }
+    .form-control {
+        background-color: #ffffff;
+        width: 100%;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    .btn-primary:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border-color: #c3e6cb;
+    }
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border-color: #f5c6cb;
+    }
+</style>
+<body>
+    <div class="container">
+<!--        <h1 class="md-4 text-center">Sentiment Analysis</h1>-->
+        <img style="width: 100%; height: 100px;" src="{{ url_for('static', filename='sentiment_analysis.png') }}" alt="">
+
+        <form method="POST" action="/predict">
+            <div class="form-group" style="padding-left: 50%;">
+                <label for="text"><h4 class="text-info"><b>Put your Text here</b></h4></label>
+                <textarea class="form-control border border-info" name="text" rows="10" cols="10" placeholder="Enter the Review Text here..."></textarea>
+            </div>
+            <div class="d-grid gap-2 mx-auto" style="padding-left: 69%;">
+                <button class="btn btn-outline-info btn-lg mt-3 rounded-pill me-md-2" type="submit">Get Sentiment</button>
+            </div>
+        </form>
+
+        {% if prediction is defined %}
+            <div class="mt-4" style="padding-left: 50%;">
+                {% if prediction == 1 %}
+                    <div class="alert alert-success" role="alert"><strong>Positive Comment !!!</strong></div>
+                {% else %}
+                    <div class="alert alert-danger" role="alert"><strong>Negative Comment !!!</strong></div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
